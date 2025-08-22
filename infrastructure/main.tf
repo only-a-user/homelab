@@ -59,3 +59,11 @@ resource "talos_cluster_kubeconfig" "this" {
   client_configuration = talos_machine_secrets.this.client_configuration
   node                 = [for k, v in var.node_data.controlplanes : k][0]
 }
+
+output "controlplane_config" {
+  value = data.talos_machine_configuration.controlplane.machine_configuration
+}
+
+output "worker_config" {
+  value = data.talos_machine_configuration.worker.machine_configuration
+}
