@@ -36,7 +36,7 @@ resource "proxmox_virtual_environment_vm" "talos" {
 
   network_device {
     model  = "virtio"
-    bridge = "vmbr0"
+    bridge = "labnet"
   }
 
   agent {

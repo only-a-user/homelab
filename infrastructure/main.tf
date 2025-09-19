@@ -30,6 +30,8 @@ resource "talos_machine_configuration_apply" "controlplane" {
       hostname     = each.value.hostname == null ? format("%s-cp-%s", var.cluster_name, index(keys(var.node_data.controlplanes), each.key)) : each.value.hostname
       install_disk = each.value.install_disk
     }),
+    templatefile("${path.module}/templates/extensions.yaml.tmpl"),
+    templatefile("${path.module}/templates/kernel.yaml.tmpl"),
     file("${path.module}/files/cp-scheduling.yaml"),
   ]
 }
@@ -43,7 +45,9 @@ resource "talos_machine_configuration_apply" "worker" {
     templatefile("${path.module}/templates/install-disk-and-hostname.yaml.tmpl", {
       hostname     = each.value.hostname == null ? format("%s-worker-%s", var.cluster_name, index(keys(var.node_data.workers), each.key)) : each.value.hostname
       install_disk = each.value.install_disk
-    })
+    }),
+    templatefile("${path.module}/templates/extensions.yaml.tmpl"),
+    templatefile("${path.module}/templates/kernel.yaml.tmpl"),
   ]
 }
 

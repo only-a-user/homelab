@@ -29,29 +29,6 @@ variable "node_data" {
       hostname     = optional(string)
     }))
   })
-  default = {
-    controlplanes = {
-      "10.5.0.2" = {
-        install_disk = "/dev/sda"
-      },
-      "10.5.0.3" = {
-        install_disk = "/dev/sda"
-      },
-      "10.5.0.4" = {
-        install_disk = "/dev/sda"
-      }
-    }
-    workers = {
-      "10.5.0.5" = {
-        install_disk = "/dev/nvme0n1"
-        hostname     = "worker-1"
-      },
-      "10.5.0.6" = {
-        install_disk = "/dev/nvme0n1"
-        hostname     = "worker-2"
-      }
-    }
-  }
 }
 
 # proxmox
@@ -60,14 +37,9 @@ variable "proxmox_nodes" {
     node = string
     ip   = string
   }))
-
-  default = {
-    "talos-control-plane" = { node = "pve01", ip = "10.20.30.11/24" }
-    "talos-worker" = { node = "pve02", ip = "10.20.30.12/24" }
-  }
 }
 
 variable "gateway" {
   type = string
-  default = "10.20.30.1"
+  default = "10.10.0.1"
 }
