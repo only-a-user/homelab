@@ -1,0 +1,7 @@
+machine:
+  kernel:
+    modules:
+      - name: iscsi_tcp
+      - name: iscsi_generic
+      - name: nbd
+      - name: configfs
