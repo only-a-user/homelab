@@ -30,9 +30,8 @@ resource "talos_machine_configuration_apply" "controlplane" {
       hostname     = each.value.hostname == null ? format("%s-cp-%s", var.cluster_name, index(keys(var.node_data.controlplanes), each.key)) : each.value.hostname
       install_disk = each.value.install_disk
     }),
-    templatefile("${path.module}/templates/extensions.yaml.tmpl"),
-    templatefile("${path.module}/templates/kernel.yaml.tmpl"),
-    file("${path.module}/files/cp-scheduling.yaml"),
+    file("${path.module}/files/kernel.yaml"),
+    file("${path.module}/files/cp-scheduling.yaml")
   ]
 }
 
@@ -46,8 +45,7 @@ resource "talos_machine_configuration_apply" "worker" {
       hostname     = each.value.hostname == null ? format("%s-worker-%s", var.cluster_name, index(keys(var.node_data.workers), each.key)) : each.value.hostname
       install_disk = each.value.install_disk
     }),
-    templatefile("${path.module}/templates/extensions.yaml.tmpl"),
-    templatefile("${path.module}/templates/kernel.yaml.tmpl"),
+    file("${path.module}/files/kernel.yaml")
   ]
 }
 
@@ -64,10 +62,12 @@ resource "talos_cluster_kubeconfig" "this" {
   node                 = [for k, v in var.node_data.controlplanes : k][0]
 }
 
-output "controlplane_config" {
-  value = data.talos_machine_configuration.controlplane.machine_configuration
+output "talosconfig" {
+  value     = data.talos_client_configuration.this.talos_config
+  sensitive = true
 }
 
-output "worker_config" {
-  value = data.talos_machine_configuration.worker.machine_configuration
+output "kubeconfig" {
+  value     = talos_cluster_kubeconfig.this.kubeconfig_raw
+  sensitive = true
 }

@@ -1,45 +1,43 @@
 # create the base vms
 resource "proxmox_virtual_environment_vm" "talos" {
-  for_each   = var.proxmox_nodes
+  for_each = var.proxmox_nodes
 
-  name       = each.key
-  vm_id      = each.key == "talos-control-plane" ? 201 : 202
-  node_name  = each.value.node
-  on_boot    = true
+  name = each.key
+  tags = ["terraform", "talos", "k8s"]
 
-  disk {
-    datastore_id = "local-lvm"
-    file_id      = proxmox_virtual_environment_download_file.talos_img[each.value.node].id
-    interface    = "scsi0"
-    size         = 8
+  node_name = each.value.node
+  vm_id     = each.key == "talos-control-plane" ? 201 : 202
+
+  on_boot = true
+
+  agent {
+    enabled = true
   }
+  stop_on_destroy = true
 
-  disk {
-    datastore_id = "local-lvm"
-    interface = "scsi1"
-    size = 128
+  cpu {
+    cores   = 4
+    sockets = 1
+    type    = "x86-64-v2-AES"
   }
 
   memory {
     dedicated = 14336
   }
 
-  cpu {
-    cores = 4
-    sockets = 1
-    type = "host"
+  cdrom {
+    file_id = proxmox_virtual_environment_download_file.talos_img[each.value.node].id
   }
 
-  cloudinit {
-    user_data = each.key == "talos-control-plane" ? talos_machine_configuration.controlplane.machine_configuration : talos_machine_configuration.worker.machine_configuration
+  disk {
+    datastore_id = "local-lvm"
+    interface    = "scsi0"
+    size         = 128
   }
 
   network_device {
-    model  = "virtio"
-    bridge = "labnet"
-  }
-
-  agent {
-    enabled = true
+    model       = "virtio"
+    bridge      = "vmbr0"
+    mac_address = each.value.mac
   }
 }
