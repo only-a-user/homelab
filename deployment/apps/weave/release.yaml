@@ -15,7 +15,8 @@ spec:
         kind: HelmRepository
         name: ww-gitops
         namespace: flux-system
-  interval: 1h0m0s
+  interval: 15m
+  timeout: 5m
   values:
     # Default values for chart.
     # This is a YAML-formatted file.

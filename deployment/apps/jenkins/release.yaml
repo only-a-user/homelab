@@ -4,7 +4,8 @@ metadata:
   name: jenkins
   namespace: components
 spec:
-  interval: 5m
+  interval: 15m
+  timeout: 5m
   chart:
     spec:
       chart: jenkins
