@@ -18,7 +18,7 @@ metadata:
   namespace: components
 subjects:
   - kind: ServiceAccount
-    name: cloudflared-tunnel-service-account
+    name: cloudflared-cloudflare-tunnel-remote
     namespace: components
 roleRef:
   apiGroup: rbac.authorization.k8s.io
