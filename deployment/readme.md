@@ -18,10 +18,10 @@ the bootstrapping command is as follows:
 ```sh
 flux bootstrap github \
   --token-auth \
-  --owner=only-a-technical-user \
-  --repository=homeserver-cluster \
+  --owner=only-a-user \
+  --repository=homelab \
   --branch=main \
-  --path=deploy \
+  --path=deployment/init \
   --personal
 ```
 

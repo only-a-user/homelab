@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 15m
-  path: apps/harbor
+  path: deployment/apps/harbor
   prune: true
   timeout: 2m
   sourceRef:
