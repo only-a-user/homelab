@@ -15,6 +15,8 @@ resource "proxmox_virtual_environment_vm" "talos" {
   }
   stop_on_destroy = true
 
+  boot_order = ["scsi0", "scsi1"]
+
   cpu {
     cores   = 4
     sockets = 1
@@ -22,17 +24,27 @@ resource "proxmox_virtual_environment_vm" "talos" {
   }
 
   memory {
-    dedicated = 14336
+    dedicated = 12288
   }
 
   cdrom {
-    file_id = proxmox_virtual_environment_download_file.talos_img[each.value.node].id
+    file_id   = proxmox_virtual_environment_download_file.talos_img[each.value.node].id
+    interface = "scsi1"
   }
 
   disk {
     datastore_id = "local-lvm"
     interface    = "scsi0"
     size         = 128
+  }
+
+  initialization {
+    ip_config {
+      ipv4 {
+        address = each.value.ip
+        gateway = var.gateway
+      }
+    }
   }
 
   network_device {

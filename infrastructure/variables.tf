@@ -4,7 +4,7 @@ variable "proxmox_password" { type = string }
 
 variable "talos_version" {
   type    = string
-  default = "1.10.6"
+  default = "v1.11.1"
 }
 
 variable "cluster_name" {
