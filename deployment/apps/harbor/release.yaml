@@ -1,4 +1,4 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: harbor
@@ -429,14 +429,12 @@ spec:
         # Scrape interval. If not set, the Prometheus default scrape interval is used.
         interval: ""
         # Metric relabel configs to apply to samples before ingestion.
-        metricRelabelings:
-          []
+        metricRelabelings: []
           # - action: keep
         #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
         #   sourceLabels: [__name__]
         # Relabel configs to apply to samples before ingestion.
-        relabelings:
-          []
+        relabelings: []
           # - sourceLabels: [__meta_kubernetes_pod_node_name]
           #   separator: ;
           #   regex: ^(.*)$
