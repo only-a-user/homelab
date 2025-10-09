@@ -1,2 +1,9 @@
 cluster:
   allowSchedulingOnControlPlanes: true
+  network:
+    cni:
+      name: flannel
+    podSubnets:
+      - 10.244.0.0/16 # Pod network (Flannel overlay)
+    serviceSubnets:
+      - 10.96.0.0/12 # K8s service network

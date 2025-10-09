@@ -1,0 +1,17 @@
+machine:
+  nodeLabels:
+    topology.kubernetes.io/region: ${cluster_name}
+    topology.kubernetes.io/zone: ${node_name}
+  install:
+    disk: ${install_disk}
+  network:
+    hostname: ${hostname}
+    interfaces:
+      - deviceSelector:
+          physical: true
+        addresses:
+          - ${ip}/${subnet_mask}
+        routes:
+          - network: ${network}
+            gateway: ${gateway}
+        dhcp: false

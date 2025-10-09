@@ -17,6 +17,16 @@ variable "cluster_endpoint" {
   type        = string
 }
 
+variable "cluster_vip" {
+  description = "The endpoint for the Talos cluster"
+  type        = string
+}
+
+variable "cluster_network" {
+  description = "The endpoint for the Talos cluster"
+  type        = string
+}
+
 variable "node_data" {
   description = "A map of node data"
   type = object({
@@ -29,6 +39,10 @@ variable "node_data" {
       hostname     = optional(string)
     }))
   })
+}
+
+variable "node_ips" {
+  type = set(string)
 }
 
 # proxmox
