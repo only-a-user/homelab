@@ -1,4 +1,4 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: jenkins
@@ -585,8 +585,7 @@ spec:
             # -- Tag for the image that triggers the reload
             tag: 1.30.3
           imagePullPolicy: IfNotPresent
-          resources:
-            {}
+          resources: {}
             #   limits:
             #     cpu: 100m
             #     memory: 100Mi
@@ -594,8 +593,7 @@ spec:
             #     cpu: 50m
             #     memory: 50Mi
           # -- Enables additional volume mounts for the config auto-reload container
-          additionalVolumeMounts:
-            []
+          additionalVolumeMounts: []
             #   - name: auto-reload-config
             #     mountPath: /var/config/logger
             #   - name: auto-reload-logs
@@ -1316,15 +1314,13 @@ spec:
         # -- A map of labels (keys/values) that agent pods must have to be able to connect to controller
         podLabels: {}
         # -- A map of labels (keys/values) that agents namespaces must have to be able to connect to controller
-        namespaceLabels:
-          {}
+        namespaceLabels: {}
           # project: myproject
       externalAgents:
         # -- The IP range from which external agents are allowed to connect to controller, i.e., 172.17.0.0/16
         ipCIDR:
         # -- A list of IP sub-ranges to be excluded from the allowlisted IP range
-        except:
-          []
+        except: []
           # - 172.17.1.0/24
 
     ## Install Default RBAC roles and bindings
