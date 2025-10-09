@@ -17,11 +17,6 @@ variable "cluster_endpoint" {
   type        = string
 }
 
-variable "cluster_vip" {
-  description = "The endpoint for the Talos cluster"
-  type        = string
-}
-
 variable "cluster_network" {
   description = "The endpoint for the Talos cluster"
   type        = string

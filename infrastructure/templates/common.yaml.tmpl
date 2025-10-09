@@ -15,7 +15,3 @@ machine:
           - network: ${network}
             gateway: ${gateway}
         dhcp: false
-%{ if vip != null }
-        vip:
-          ip: ${vip}
-%{ endif }

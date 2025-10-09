@@ -38,7 +38,6 @@ resource "talos_machine_configuration_apply" "controlplane" {
       network      = var.cluster_network
       gateway      = var.gateway
       install_disk = each.value.install_disk
-      vip          = var.cluster_vip
     }),
     file("${path.module}/files/kernel.yaml"),
     file("${path.module}/files/cp-scheduling.yaml")
@@ -51,7 +50,7 @@ resource "talos_machine_configuration_apply" "worker" {
   for_each                    = var.node_data.workers
   node                        = each.key
   config_patches = [
-    templatefile("${path.module}/templates/common-worker.yaml.tmpl", {
+    templatefile("${path.module}/templates/common.yaml.tmpl", {
       cluster_name = var.cluster_name
       node_name    = each.value.hostname
       hostname     = each.value.hostname == null ? format("%s-worker-%s", var.cluster_name, index(keys(var.node_data.workers), each.key)) : each.value.hostname
