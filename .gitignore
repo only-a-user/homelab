@@ -5,3 +5,7 @@
 terraform.tfstate
 terraform.tfstate.backup
 infrastructure/outputs
+
+# fluxcd
+secrets/
+.token.env
