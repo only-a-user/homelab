@@ -1,0 +1,15 @@
+#cloud-config
+package_update: true
+packages:
+  - qemu-guest-agent
+  - curl
+  - iptables
+users:
+  - name: ${vm_user}
+    ssh_authorized_keys:
+      - ${ssh_pub_key}
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/ash
+runcmd:
+  - rc-update add qemu-guest-agent
+  - rc-service qemu-guest-agent start
