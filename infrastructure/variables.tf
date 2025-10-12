@@ -28,5 +28,7 @@ variable "proxmox_nodes" {
     ip          = string
     mac         = string
     template_id = string
+    memory      = string
+    disk        = string
   }))
 }
