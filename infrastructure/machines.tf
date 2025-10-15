@@ -3,19 +3,13 @@ resource "proxmox_virtual_environment_vm" "nodes" {
   for_each = var.proxmox_nodes
 
   name = each.key
-  tags = ["terraform", "alpine", "k3s"]
+  tags = ["terraform", "debian", "k3s"]
 
   node_name = each.value.node
   vm_id     = each.value.id
 
   on_boot         = true
   stop_on_destroy = true
-
-  clone {
-    vm_id   = each.value.template_id
-    full    = true
-    retries = 4
-  }
 
   # wether to use the qemu agent
   agent {
@@ -35,6 +29,7 @@ resource "proxmox_virtual_environment_vm" "nodes" {
   disk {
     datastore_id = "local-lvm"
     interface    = "scsi0"
+    import_from  = strcontains(each.value.node, "pve02") ? proxmox_virtual_environment_download_file.debian_img_pve02.id : proxmox_virtual_environment_download_file.debian_img_pve03.id
     size         = each.value.disk
   }
 
