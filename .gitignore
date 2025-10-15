@@ -10,3 +10,7 @@ infrastructure/outputs
 # fluxcd
 secrets/
 .token.env
+
+# ansible
+.ansible/
+inventory.yml

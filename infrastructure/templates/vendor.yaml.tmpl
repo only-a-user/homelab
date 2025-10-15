@@ -9,7 +9,7 @@ users:
     ssh_authorized_keys:
       - ${ssh_pub_key}
     sudo: ALL=(ALL) NOPASSWD:ALL
-    shell: /bin/ash
+    shell: /bin/bash
 runcmd:
-  - rc-update add qemu-guest-agent
-  - rc-service qemu-guest-agent start
+  - systemctl enable qemu-guest-agent
+  - systemctl start qemu-guest-agent
