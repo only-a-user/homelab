@@ -188,7 +188,7 @@ spec:
       annotations:
         kubernetes.io/ingress.class: traefik
       hosts:
-        - host: forgejo.only-a-user.com
+        - host: git.only-a-user.com
           paths:
             - path: /
               pathType: Prefix
@@ -196,7 +196,7 @@ spec:
       tls:
         - secretName:
           hosts:
-            - forgejo.only-a-user.com
+            - git.only-a-user.com
 
     # Enables Gateway API HTTPRoute as a replacement for traditional Ingress resources
     ## @section Gateway-API HTTPRoute
@@ -378,7 +378,7 @@ spec:
     extraVolumes: []
     # - name: postgres-ssl-vol
     #   secret:
-    #     secretName: gitea-postgres-ssl
+    #     secretName: forgejo-postgres-ssl
 
     ## @param extraContainerVolumeMounts Mounts that are only mapped into the Forgejo runtime/main container, to e.g. override custom templates.
     extraContainerVolumeMounts: []
@@ -540,7 +540,7 @@ spec:
           SSH_LISTEN_PORT: 2222 # rootless image
           SSH_DOMAIN: git.only-a-user.com
 
-        ## @param gitea.config.database Database configuration (only necessary with an [externally managed DB](https://code.forgejo.org/forgejo-helm/forgejo-helm#external-database)).
+        ## @param gitea.config.database Database configuration (only necessary with an [externally managed DB](#external-database)).
         database: {}
 
         ## @param gitea.config.indexer Settings for what content is indexed and how
@@ -719,106 +719,6 @@ spec:
         periodSeconds: 10
         successThreshold: 1
         failureThreshold: 10
-
-    ## @section Redis&reg; Cluster
-    ## @descriptionStart
-    ## Redis&reg; Cluster is loaded as a dependency from [Bitnami](https://github.com/bitnami/charts/tree/master/bitnami/redis-cluster) if enabled in the values.
-    ## Full configuration options are available on their website.
-    ## Redis cluster and [Redis](#redis) cannot be enabled at the same time.
-    ## @descriptionEnd
-    #
-    ## @param redis-cluster.enabled Enable redis cluster
-    ## @param redis-cluster.usePassword Whether to use password authentication
-    ## @param redis-cluster.cluster.nodes Number of redis cluster master nodes
-    ## @param redis-cluster.cluster.replicas Number of redis cluster master node replicas
-    redis-cluster:
-      enabled: true
-      usePassword: false
-      cluster:
-        nodes: 3 # default: 6
-        replicas: 0 # default: 1
-
-    ## @section Redis&reg;
-    ## @descriptionStart
-    ## Redis&reg; is loaded as a dependency from [Bitnami](https://github.com/bitnami/charts/tree/master/bitnami/redis) if enabled in the values.
-    ## Full configuration options are available on their website.
-    ## Redis and [Redis cluster](#redis-cluster) cannot be enabled at the same time.
-    ## @descriptionEnd
-    #
-    ## @param redis.enabled Enable redis standalone or replicated
-    ## @param redis.architecture Whether to use standalone or replication
-    ## @param redis.global.redis.password Required password
-    ## @param redis.master.count Number of Redis master instances to deploy
-    redis:
-      enabled: false
-      architecture: standalone
-      global:
-        redis:
-          password: changeme
-      master:
-        count: 1
-
-    ## @section PostgreSQL HA
-    ## @descriptionStart
-    ## PostgreSQL HA is loaded as a dependency from [Bitnami](https://github.com/bitnami/charts/tree/master/bitnami/postgresql-ha) if enabled in the values.
-    ## Full configuration options are available on their website.
-    ## @descriptionEnd
-    #
-    ## @param postgresql-ha.enabled Enable PostgreSQL HA chart
-    ## @param postgresql-ha.postgresql.password Password for the `gitea` user (overrides `auth.password`)
-    ## @param postgresql-ha.global.postgresql.database Name for a custom database to create (overrides `auth.database`)
-    ## @param postgresql-ha.global.postgresql.username Name for a custom user to create (overrides `auth.username`)
-    ## @param postgresql-ha.global.postgresql.password Name for a custom password to create (overrides `auth.password`)
-    ## @param postgresql-ha.postgresql.repmgrPassword Repmgr Password
-    ## @param postgresql-ha.postgresql.postgresPassword postgres Password
-    ## @param postgresql-ha.pgpool.adminPassword pgpool adminPassword
-    ## @param postgresql-ha.service.ports.postgresql PostgreSQL service port (overrides `service.ports.postgresql`)
-    ## @param postgresql-ha.persistence.size PVC Storage Request for PostgreSQL HA volume
-    postgresql-ha:
-      global:
-        postgresql:
-          database: gitea
-          password: gitea
-          username: gitea
-      enabled: true
-      postgresql:
-        repmgrPassword: changeme2
-        postgresPassword: changeme1
-        password: changeme4
-      pgpool:
-        adminPassword: changeme3
-      service:
-        ports:
-          postgresql: 5432
-      persistence:
-        size: 10Gi
-
-    ## @section PostgreSQL
-    ## @descriptionStart
-    ## PostgreSQL is loaded as a dependency from [Bitnami](https://github.com/bitnami/charts/tree/master/bitnami/postgresql) if enabled in the values.
-    ## Full configuration options are available on their website.
-    ## @descriptionEnd
-    #
-    ## @param postgresql.enabled Enable PostgreSQL
-    ## @param postgresql.global.postgresql.auth.password Password for the `gitea` user (overrides `auth.password`)
-    ## @param postgresql.global.postgresql.auth.database Name for a custom database to create (overrides `auth.database`)
-    ## @param postgresql.global.postgresql.auth.username Name for a custom user to create (overrides `auth.username`)
-    ## @param postgresql.global.postgresql.service.ports.postgresql PostgreSQL service port (overrides `service.ports.postgresql`)
-    ## @param postgresql.primary.persistence.size PVC Storage Request for PostgreSQL volume
-    postgresql:
-      enabled: false
-      global:
-        postgresql:
-          auth:
-            password: gitea
-            database: gitea
-            username: gitea
-          service:
-            ports:
-              postgresql: 5432
-      primary:
-        persistence:
-          size: 10Gi
 
     # By default, removed or moved settings that still remain in a user defined values.yaml will cause Helm to fail running the install/update.
     # Set it to false to skip this basic validation check.
