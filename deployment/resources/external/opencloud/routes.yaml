@@ -1,0 +1,65 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: external-opencloud-tcp
+  namespace: external-routes
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: HostSNI(`cloud.steppler.cloud`)
+      services:
+        - name: external-opencloud-tcp-svc
+          port: 443
+    - match: HostSNI(`collabora.steppler.cloud`)
+      services:
+        - name: external-opencloud-tcp-svc
+          port: 443
+    - match: HostSNI(`traefik.steppler.cloud`)
+      services:
+        - name: external-opencloud-tcp-svc
+          port: 443
+    - match: HostSNI(`wopiserver.steppler.cloud`)
+      services:
+        - name: external-opencloud-tcp-svc
+          port: 443
+  tls:
+    passthrough: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: external-opencloud-http
+  namespace: external-routes
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`cloud.steppler.cloud`)
+      kind: Rule
+      services:
+        - name: external-opencloud-http-svc
+          port: 80
+      middlewares:
+        - name: external-opencloud-http-headers
+    - match: Host(`collabora.steppler.cloud`)
+      kind: Rule
+      services:
+        - name: external-opencloud-http-svc
+          port: 80
+      middlewares:
+        - name: external-opencloud-http-headers
+    - match: Host(`traefik.steppler.cloud`)
+      kind: Rule
+      services:
+        - name: external-opencloud-http-svc
+          port: 80
+      middlewares:
+        - name: external-opencloud-http-headers
+    - match: Host(`wopiserver.steppler.cloud`)
+      kind: Rule
+      services:
+        - name: external-opencloud-http-svc
+          port: 80
+      middlewares:
+        - name: external-opencloud-http-headers
