@@ -161,8 +161,8 @@ spec:
         port: 2222
         clusterIP:
         loadBalancerIP:
-        nodePort: 2222
-        externalTrafficPolicy:
+        nodePort: 32222
+        externalTrafficPolicy: Local
         externalIPs:
         ipFamilyPolicy:
         ipFamilies:
