@@ -158,7 +158,7 @@ spec:
       ## @param service.ssh.loadBalancerClass Loadbalancer class
       ssh:
         type: ClusterIP
-        port: 22
+        port: 2222
         clusterIP:
         loadBalancerIP:
         nodePort:
