@@ -192,7 +192,7 @@ spec:
           asn: /geoip/GeoLite2-ASN.mmdb
       web:
         # -- Relative path the authentik instance will be available at. Value _must_ contain both a leading and trailing slash.
-        path: /auth/
+        path: /
       email:
         # -- SMTP Server emails are sent from, fully optional
         host: ""

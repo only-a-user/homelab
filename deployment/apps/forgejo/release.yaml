@@ -536,7 +536,7 @@ spec:
 
         ## @param gitea.config.server [object] General server settings
         server:
-          SSH_PORT: 22 # rootful image
+          SSH_PORT: 2222 # rootful image
           SSH_LISTEN_PORT: 2222 # rootless image
           SSH_DOMAIN: git.only-a-user.com
 
