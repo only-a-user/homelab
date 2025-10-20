@@ -161,7 +161,7 @@ spec:
         port: 2222
         clusterIP:
         loadBalancerIP:
-        nodePort:
+        nodePort: 2222
         externalTrafficPolicy:
         externalIPs:
         ipFamilyPolicy:
