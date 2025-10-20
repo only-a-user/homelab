@@ -157,7 +157,7 @@ spec:
       ## @param service.ssh.labels SSH service additional labels
       ## @param service.ssh.loadBalancerClass Loadbalancer class
       ssh:
-        type: ClusterIP
+        type: NodePort
         port: 2222
         clusterIP:
         loadBalancerIP:
