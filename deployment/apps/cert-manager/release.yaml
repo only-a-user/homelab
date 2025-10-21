@@ -5,7 +5,7 @@ metadata:
   namespace: components
 spec:
   chartRef:
-    kind: OCIRepository
+    kind: HelmRepository
     name: cert-manager
     namespace: flux-system
   interval: 15m
