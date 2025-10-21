@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: letsencrypt-wildcard-cert-prod
+  namespace: certs
+spec:
+  secretName: letsencrypt-wildcard-cert-prod
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - "only-a-user.com"
+    - "*.only-a-user.com"
