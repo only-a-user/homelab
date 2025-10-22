@@ -194,7 +194,7 @@ spec:
               pathType: Prefix
               port: http
       tls:
-        - secretName:
+        - secretName: letsencrypt-wildcard-cert-prod
           hosts:
             - git.only-a-user.com
 
