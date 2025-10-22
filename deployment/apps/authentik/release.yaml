@@ -639,7 +639,7 @@ spec:
               - auth.only-a-user.com
 
         # -- uses `server.service.servicePortHttps` instead of `server.service.servicePortHttp`
-        https: true
+        https: false
 
       route:
         main:
