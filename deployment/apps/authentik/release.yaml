@@ -633,13 +633,13 @@ spec:
           #         name: use-annotation
 
         # -- ingress TLS configuration
-        tls: []
-          # - secretName: authentik-tls
-          #   hosts:
-          #     - authentik.domain.tld
+        tls:
+          - secretName: letsencrypt-wildcard-cert-prod
+            hosts:
+              - auth.only-a-user.com
 
         # -- uses `server.service.servicePortHttps` instead of `server.service.servicePortHttp`
-        https: false
+        https: true
 
       route:
         main:
