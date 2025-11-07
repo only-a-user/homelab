@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: jenkins
-      version: 5.8.39
+      version: 5.8.106
       sourceRef:
         kind: HelmRepository
         name: jenkins
@@ -45,6 +45,9 @@ spec:
 
     # -- Enables rendering of the helm.sh/chart label to the annotations
     renderHelmLabels: true
+
+    # -- Configures extra labels for the agent all objects
+    extraLabels: {}
 
     controller:
       # -- Used for label app.kubernetes.io/component
@@ -187,12 +190,12 @@ spec:
       jenkinsUrlProtocol: "https"
 
       # -- Set Jenkins URL if you are not using the ingress definitions provided by the chart
-      jenkinsUrl: "https://lab.only-a-user.com/jenkins"
+      jenkinsUrl: "https://build.only-a-user.com"
 
       # If you set this prefix and use ingress controller, then you might want to set the ingress path below
       # I.e., "/jenkins"
       # -- Root URI Jenkins will be served on
-      jenkinsUriPrefix: "/jenkins"
+      jenkinsUriPrefix:
 
       # -- Enable pod security context (must be `true` if podSecurityContextOverride, runAsUser or fsGroup are set)
       usePodSecurityContext: true
@@ -229,6 +232,9 @@ spec:
         runAsGroup: 1000
         readOnlyRootFilesystem: true
         allowPrivilegeEscalation: false
+
+      # -- enable or disable the controller k8s service
+      serviceEnabled: true
 
       # For minikube, set this to NodePort, elsewhere uses LoadBalancer
       # Use ClusterIP if your setup includes ingress controller
@@ -419,10 +425,10 @@ spec:
       # Plugins will be installed during Jenkins controller start
       # -- List of Jenkins plugins to install. If you don't want to install plugins, set it to `false`
       installPlugins:
-        - kubernetes:4353.vb_47977da_9417
+        - kubernetes:4384.v1b_6367f393d9
         - workflow-aggregator:608.v67378e9d3db_1
-        - git:5.7.0
-        - configuration-as-code:1971.vf9280461ea_89
+        - git:5.8.0
+        - configuration-as-code:2006.v001a_2ca_6b_574
 
       # If set to false, Jenkins will download the minimum required version of all dependencies.
       # -- Download the minimum required version or latest version of all dependencies
@@ -584,7 +590,7 @@ spec:
             # -- Repository of the image that triggers the reload
             repository: kiwigrid/k8s-sidecar
             # -- Tag for the image that triggers the reload
-            tag: 1.30.3
+            tag: 1.30.7
           imagePullPolicy: IfNotPresent
           resources: {}
             #   limits:
@@ -702,6 +708,9 @@ spec:
       # -- Topology spread constraints
       topologySpreadConstraints: {}
 
+      # -- DNS config for the pod
+      dnsConfig: {}
+
       ingress:
         # -- Enables ingress
         enabled: true
@@ -734,18 +743,18 @@ spec:
 
         # Set this path to jenkinsUriPrefix above or use annotations to rewrite path
         # -- Ingress path
-        path: "/jenkins"
+        path:
 
         # configures the hostname e.g. jenkins.example.com
         # -- Ingress hostname
-        hostName: lab.only-a-user.com
+        hostName: build.only-a-user.com
         # -- Hostname to serve assets from
         resourceRootUrl:
         # -- Ingress TLS configuration
-        tls: []
-        # - secretName: jenkins.cluster.local
-        #   hosts:
-        #     - jenkins.cluster.local
+        tls:
+          - secretName: "letsencrypt-wildcard-cert-prod"
+            hosts:
+              - build.only-a-user.com
 
       # often you want to have your controller all locked down and private,
       # but you still want to get webhooks from your SCM
@@ -862,9 +871,9 @@ spec:
       httpsKeyStore:
         # -- Enables HTTPS keystore on jenkins controller
         enable: false
-        # -- Name of the secret that already has ssl keystore
+        # -- Name of the secret that already has SSL keystore
         jenkinsHttpsJksSecretName: ""
-        # -- Name of the key in the secret that already has ssl keystore
+        # -- Name of the key in the secret that already has SSL keystore
         jenkinsHttpsJksSecretKey: "jenkins-jks-file"
         # -- Name of the secret that contains the JKS password, if it is not in the same secret as the JKS file
         jenkinsHttpsJksPasswordSecretName: ""
@@ -968,10 +977,12 @@ spec:
       # -- Custom registry used to pull the agent jnlp image from
       jnlpregistry:
       image:
+        # -- Registry to pull the agent jnlp image from
+        registry: ""
         # -- Repository to pull the agent jnlp image from
         repository: "jenkins/inbound-agent"
         # -- Tag of the image to pull
-        tag: "3309.v27b_9314fd1a_4-4"
+        tag: "3345.v03dee9b_f88fc-5"
       # -- Configure working directory for default agent
       workingDir: "/home/jenkins/agent"
       nodeUsageMode: "NORMAL"
