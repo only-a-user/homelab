@@ -677,7 +677,7 @@ spec:
     ## ref: http://docs.grafana.org/administration/provisioning/#datasources
     ##
     datasources:
-      datasources.yaml:
+      datasources.yaml: {}
         # apiVersion: 1
         # datasources:
         #   - name: "Prometheus"
