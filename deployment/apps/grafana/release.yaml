@@ -430,7 +430,7 @@ spec:
     ##
     persistence:
       type: pvc
-      enabled: false
+      enabled: true
       # storageClassName: default
       ## (Optional) Use this to bind the claim to an existing PersistentVolume (PV) by name.
       volumeName: ""
@@ -677,26 +677,26 @@ spec:
     ## ref: http://docs.grafana.org/administration/provisioning/#datasources
     ##
     datasources:
-      datasources.yaml: {}
-        # apiVersion: 1
-        # datasources:
-        #   - name: "Prometheus"
-        #     type: prometheus
-        #     uid: prometheus
-        #     url: http://prometheus-kube-prometheus-prometheus.monitoring:9090/
-        #     access: proxy
-        #     isDefault: true
-        #     jsonData:
-        #       httpMethod: POST
-        #       timeInterval: 30s
-        #   - name: "Alertmanager"
-        #     type: alertmanager
-        #     uid: alertmanager
-        #     url: http://prometheus-kube-prometheus-alertmanager.monitoring:9093/
-        #     access: proxy
-        #     jsonData:
-        #       handleGrafanaManagedAlerts: false
-        #       implementation: prometheus
+      datasources.yaml:
+        apiVersion: 1
+        datasources:
+          - name: "Prometheus"
+            type: prometheus
+            uid: prometheus
+            url: http://prometheus-kube-prometheus-prometheus.monitoring:9090/
+            access: proxy
+            isDefault: true
+            jsonData:
+              httpMethod: POST
+              timeInterval: 30s
+          - name: "Alertmanager"
+            type: alertmanager
+            uid: alertmanager
+            url: http://prometheus-kube-prometheus-alertmanager.monitoring:9093/
+            access: proxy
+            jsonData:
+              handleGrafanaManagedAlerts: false
+              implementation: prometheus
     #    - name: CloudWatch
     #      type: cloudwatch
     #      access: proxy
@@ -893,9 +893,9 @@ spec:
     ##   example-dashboard.json: |
     ##     RAW_JSON
     ##
-    dashboardsConfigMaps: {}
-    # dashboardsConfigMaps:
-    #   default: prometheus-kube-prometheus-grafana-overview
+    # dashboardsConfigMaps: {}
+    dashboardsConfigMaps:
+      default: prometheus-kube-prometheus-grafana-overview
 
     ## Grafana's primary configuration
     ## NOTE: values in map will be converted to ini format
