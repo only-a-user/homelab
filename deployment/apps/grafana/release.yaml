@@ -430,7 +430,7 @@ spec:
     ##
     persistence:
       type: pvc
-      enabled: true
+      enabled: false
       # storageClassName: default
       ## (Optional) Use this to bind the claim to an existing PersistentVolume (PV) by name.
       volumeName: ""
@@ -503,15 +503,15 @@ spec:
             - ALL
 
     # Administrator credentials when not using an existing secret (see below)
-    adminUser: admin
-    adminPassword: strongpassword
+    # adminUser: admin
+    # adminPassword: strongpassword
 
     # Use an existing secret for the admin user.
-    # admin:
-    #   ## Name of the secret. Can be templated.
-    #   existingSecret: "grafana-admin"
-    #   userKey: "admin-user"
-    #   passwordKey: "admin-password"
+    admin:
+      ## Name of the secret. Can be templated.
+      existingSecret: "grafana-admin"
+      userKey: "admin-user"
+      passwordKey: "admin-password"
 
     ## Define command to be executed at startup by grafana container
     ## Needed if using `vault-env` to manage secrets (ref: https://banzaicloud.com/blog/inject-secrets-into-pods-vault/)
@@ -678,25 +678,25 @@ spec:
     ##
     datasources:
       datasources.yaml:
-        apiVersion: 1
-        datasources:
-          - name: "Prometheus"
-            type: prometheus
-            uid: prometheus
-            url: http://prometheus-kube-prometheus-prometheus.monitoring:9090/
-            access: proxy
-            isDefault: true
-            jsonData:
-              httpMethod: POST
-              timeInterval: 30s
-          - name: "Alertmanager"
-            type: alertmanager
-            uid: alertmanager
-            url: http://prometheus-kube-prometheus-alertmanager.monitoring:9093/
-            access: proxy
-            jsonData:
-              handleGrafanaManagedAlerts: false
-              implementation: prometheus
+        # apiVersion: 1
+        # datasources:
+        #   - name: "Prometheus"
+        #     type: prometheus
+        #     uid: prometheus
+        #     url: http://prometheus-kube-prometheus-prometheus.monitoring:9090/
+        #     access: proxy
+        #     isDefault: true
+        #     jsonData:
+        #       httpMethod: POST
+        #       timeInterval: 30s
+        #   - name: "Alertmanager"
+        #     type: alertmanager
+        #     uid: alertmanager
+        #     url: http://prometheus-kube-prometheus-alertmanager.monitoring:9093/
+        #     access: proxy
+        #     jsonData:
+        #       handleGrafanaManagedAlerts: false
+        #       implementation: prometheus
     #    - name: CloudWatch
     #      type: cloudwatch
     #      access: proxy
@@ -893,8 +893,9 @@ spec:
     ##   example-dashboard.json: |
     ##     RAW_JSON
     ##
-    dashboardsConfigMaps:
-      default: prometheus-kube-prometheus-grafana-overview
+    dashboardsConfigMaps: {}
+    # dashboardsConfigMaps:
+    #   default: prometheus-kube-prometheus-grafana-overview
 
     ## Grafana's primary configuration
     ## NOTE: values in map will be converted to ini format
