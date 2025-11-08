@@ -430,7 +430,7 @@ spec:
     ##
     persistence:
       type: pvc
-      enabled: false
+      enabled: true
       # storageClassName: default
       ## (Optional) Use this to bind the claim to an existing PersistentVolume (PV) by name.
       volumeName: ""
