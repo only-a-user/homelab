@@ -12,6 +12,10 @@ spec:
         kind: HelmRepository
         name: sealed-secrets
         namespace: flux-system
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace
   interval: 15m
   timeout: 5m
   releaseName: sealed-secrets
