@@ -10,6 +10,7 @@ infrastructure/outputs
 # fluxcd
 secrets/
 .token.env
+pub-sealed-secrets.pem
 
 # ansible
 .ansible/
