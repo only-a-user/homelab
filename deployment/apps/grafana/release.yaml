@@ -680,11 +680,23 @@ spec:
       datasources.yaml:
         apiVersion: 1
         datasources:
-          - name: Prometheus
+          - name: "Prometheus"
             type: prometheus
-            url: http://prom-kube-prometheus-stack-prometheus.monitoring.svc:9090
+            uid: prometheus
+            url: http://prometheus-kube-prometheus-prometheus.monitoring:9090/
             access: proxy
             isDefault: true
+            jsonData:
+              httpMethod: POST
+              timeInterval: 30s
+          - name: "Alertmanager"
+            type: alertmanager
+            uid: alertmanager
+            url: http://prometheus-kube-prometheus-alertmanager.monitoring:9093/
+            access: proxy
+            jsonData:
+              handleGrafanaManagedAlerts: false
+              implementation: prometheus
     #    - name: CloudWatch
     #      type: cloudwatch
     #      access: proxy
@@ -882,7 +894,7 @@ spec:
     ##     RAW_JSON
     ##
     dashboardsConfigMaps:
-      default: prom-kube-prometheus-stack-grafana
+      default: prometheus-kube-prometheus-grafana-overview
 
     ## Grafana's primary configuration
     ## NOTE: values in map will be converted to ini format
