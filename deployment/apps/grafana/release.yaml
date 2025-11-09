@@ -915,7 +915,7 @@ spec:
         url: https://grafana.net
       server:
         domain: "{{ if (and .Values.ingress.enabled .Values.ingress.hosts) }}{{ tpl (.Values.ingress.hosts | first) . }}{{ else }}''{{ end }}"
-        root_url: "%(protocol)s://%(domain)s/"
+        root_url: "https://dash.only-a-user.com/"
     ## grafana Authentication can be enabled with the following values on grafana.ini
     # server:
     # The full public facing url you use in browser, used for redirects and emails
