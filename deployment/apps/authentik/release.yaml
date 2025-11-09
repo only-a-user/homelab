@@ -598,7 +598,7 @@ spec:
           # -- Prometheus ServiceMonitor tlsConfig
           tlsConfig: {}
           # -- Prometheus ServiceMonitor namespace
-          namespace: ""
+          namespace: "monitoring"
           # -- Prometheus ServiceMonitor labels
           labels: {}
           # -- Prometheus ServiceMonitor annotations
@@ -958,7 +958,7 @@ spec:
       ## authentik worker metrics service configuration
       metrics:
         # -- deploy metrics service
-        enabled: false
+        enabled: true
         service:
           # -- metrics service type
           type: ClusterIP
@@ -974,7 +974,7 @@ spec:
           portName: metrics
         serviceMonitor:
           # -- enable a prometheus ServiceMonitor
-          enabled: false
+          enabled: true
           # -- Prometheus ServiceMonitor interval
           interval: 30s
           # -- Prometheus ServiceMonitor scrape timeout
@@ -992,7 +992,7 @@ spec:
           # -- Prometheus ServiceMonitor tlsConfig
           tlsConfig: {}
           # -- Prometheus ServiceMonitor namespace
-          namespace: ""
+          namespace: "monitoring"
           # -- Prometheus ServiceMonitor labels
           labels: {}
           # -- Prometheus ServiceMonitor annotations
