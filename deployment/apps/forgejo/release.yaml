@@ -449,7 +449,7 @@ spec:
       ## @param gitea.metrics.serviceMonitor.enabled Enable Forgejo metrics service monitor
       ## @param gitea.metrics.serviceMonitor.namespace Namespace in which Prometheus is running
       metrics:
-        enabled: true
+        enabled: false
         serviceMonitor:
           enabled: true
           namespace: "monitoring"
