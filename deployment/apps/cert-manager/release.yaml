@@ -555,12 +555,12 @@ spec:
         # The namespace that the service monitor should live in, defaults
         # to the cert-manager namespace.
         # +docs:property
-        # namespace: cert-manager
+        namespace: monitoring
 
         # Specifies the `prometheus` label on the created ServiceMonitor. This is
         # used when different Prometheus instances have label selectors matching
         # different ServiceMonitors.
-        prometheusInstance: default
+        prometheusInstance: monitoring
 
         # The target port to set on the ServiceMonitor. This must match the port that the
         # cert-manager controller is listening on for metrics.

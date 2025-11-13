@@ -453,8 +453,8 @@ spec:
         serviceMonitor:
           enabled: true
           namespace: "monitoring"
-          #  additionalLabels:
-          #    prometheus-release: prom1
+          additionalLabels:
+            prometheus: monitoring
 
       ## @param gitea.ldap LDAP configuration
       ldap: []
