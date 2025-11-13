@@ -1,0 +1,26 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations:
+    meta.helm.sh/release-name: forgejo
+    meta.helm.sh/release-namespace: components
+  labels:
+    prometheus: monitoring
+  name: forgejo
+  namespace: monitoring
+spec:
+  endpoints:
+    - honorLabels: true
+      interval: 30s
+      path: /metrics
+      port: http
+      scheme: http
+      scrapeTimeout: 30s
+  jobLabel: forgejo
+  namespaceSelector:
+    matchNames:
+      - monitoring
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: forgejo
+      app.kubernetes.io/name: forgejo

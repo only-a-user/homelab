@@ -451,7 +451,7 @@ spec:
       metrics:
         enabled: true
         serviceMonitor:
-          enabled: true
+          enabled: false
           namespace: "monitoring"
           additionalLabels:
             prometheus: monitoring
