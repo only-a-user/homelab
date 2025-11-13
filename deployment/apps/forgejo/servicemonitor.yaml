@@ -19,7 +19,7 @@ spec:
   jobLabel: forgejo
   namespaceSelector:
     matchNames:
-      - monitoring
+      - components
   selector:
     matchLabels:
       app.kubernetes.io/instance: forgejo
