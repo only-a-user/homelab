@@ -425,7 +425,8 @@ spec:
       ##
       serviceMonitor:
         enabled: true
-        additionalLabels: {}
+        additionalLabels:
+          prometheus: monitoring
         # Scrape interval. If not set, the Prometheus default scrape interval is used.
         interval: ""
         # Metric relabel configs to apply to samples before ingestion.

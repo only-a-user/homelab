@@ -829,7 +829,8 @@ spec:
         # -- Enables prometheus service monitor
         enabled: true
         # -- Additional labels to add to the service monitor object
-        serviceMonitorAdditionalLabels: {}
+        serviceMonitorAdditionalLabels:
+          prometheus: monitoring
         # -- Set a custom namespace where to deploy ServiceMonitor resource
         serviceMonitorNamespace: monitoring
         # -- How often prometheus should scrape metrics

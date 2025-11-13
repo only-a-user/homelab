@@ -272,7 +272,9 @@ spec:
       enabled: true
       path: /metrics
       namespace: monitoring
-      labels: {}
+      labels:
+        app: grafana
+        prometheus: monitoring
       interval: 30s
       scheme: http
       tlsConfig: {}
