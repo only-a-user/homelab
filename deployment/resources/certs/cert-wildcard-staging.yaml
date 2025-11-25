@@ -11,3 +11,5 @@ spec:
   dnsNames:
     - "only-a-user.com"
     - "*.only-a-user.com"
+    - "steppler.cloud"
+    - "*.steppler.cloud"

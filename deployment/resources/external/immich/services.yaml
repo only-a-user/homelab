@@ -1,28 +1,6 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: external-immich-tcp-svc
-  namespace: external-routes
-spec:
-  ports:
-    - name: https
-      port: 443
----
-apiVersion: v1
-kind: Endpoints
-metadata:
-  name: external-immich-tcp-svc
-  namespace: external-routes
-subsets:
-  - addresses:
-      - ip: 10.10.110.99
-    ports:
-      - name: https
-        port: 443
----
-apiVersion: v1
-kind: Service
-metadata:
   name: external-immich-http-svc
   namespace: external-routes
 spec:
@@ -40,4 +18,4 @@ subsets:
       - ip: 10.10.110.99
     ports:
       - name: http
-        port: 80
+        port: 2283
