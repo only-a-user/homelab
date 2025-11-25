@@ -12,6 +12,7 @@ spec:
       - selector:
           dnsZones:
             - "only-a-user.com"
+            - "steppler.cloud"
         dns01:
           cloudflare:
             email: admin@only-a-user.com
