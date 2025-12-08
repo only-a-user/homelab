@@ -6,8 +6,8 @@ metadata:
 spec:
   ports:
     - name: https
-      port: 9443
-      targetPort: 2283
+      port: 443
+      targetPort: 9443
       protocol: TCP
 ---
 apiVersion: v1
@@ -17,8 +17,8 @@ metadata:
   namespace: external-routes
 subsets:
   - addresses:
-      - ip: 10.10.110.99
+      - ip: 10.10.198.114
     ports:
       - name: https
-        port: 2283
+        port: 9443
         protocol: TCP
