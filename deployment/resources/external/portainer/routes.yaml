@@ -9,7 +9,7 @@ spec:
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: external-portainer-http
+  name: external-portainer-https
   namespace: external-routes
 spec:
   entryPoints:
@@ -21,6 +21,6 @@ spec:
         - name: external-portainer-https-svc
           port: 443
           scheme: https
-          serversTransport: portainer-transport
+          # serversTransport: portainer-transport
   tls:
     secretName: "letsencrypt-wildcard-cert-prod"
