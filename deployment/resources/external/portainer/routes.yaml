@@ -12,6 +12,6 @@ spec:
       kind: Rule
       services:
         - name: external-portainer-https-svc
-          port: 443
+          port: 9443
   tls:
     secretName: "letsencrypt-wildcard-cert-prod"

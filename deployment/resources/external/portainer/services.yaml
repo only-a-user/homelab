@@ -6,7 +6,7 @@ metadata:
 spec:
   ports:
     - name: https
-      port: 443
+      port: 9443
       targetPort: 2283
       protocol: TCP
 ---
