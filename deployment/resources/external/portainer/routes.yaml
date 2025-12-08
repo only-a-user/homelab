@@ -1,26 +1,15 @@
 apiVersion: traefik.io/v1alpha1
-kind: ServersTransport
+kind: IngressRouteTCP
 metadata:
-  name: portainer-transport
-  namespace: external-routes
-spec:
-  insecureSkipVerify: true
----
-apiVersion: traefik.io/v1alpha1
-kind: IngressRoute
-metadata:
-  name: external-portainer-https
+  name: external-portainer-tcp
   namespace: external-routes
 spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`manage.steppler.cloud`)
-      kind: Rule
+    - match: HostSNI(`manage.steppler.cloud`)
       services:
-        - name: external-portainer-https-svc
+        - name: external-portainer-tcp-svc
           port: 443
-          scheme: https
-          # serversTransport: portainer-transport
   tls:
-    secretName: "letsencrypt-wildcard-cert-prod"
+    passthrough: true
