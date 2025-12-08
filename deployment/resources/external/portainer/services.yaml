@@ -8,7 +8,6 @@ spec:
     - name: https
       port: 443
       targetPort: 9443
-      protocol: TCP
 ---
 apiVersion: v1
 kind: Endpoints
@@ -21,4 +20,21 @@ subsets:
     ports:
       - name: https
         port: 9443
-        protocol: TCP
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: external-portainer-http
+  namespace: external-routes
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`manage.steppler.cloud`)
+      kind: Rule
+      services:
+        - name: external-portainer-https-svc
+          port: 443
+          scheme: https
+  tls:
+    secretName: "letsencrypt-wildcard-cert-prod"
