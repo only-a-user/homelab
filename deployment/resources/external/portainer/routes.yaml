@@ -1,4 +1,12 @@
 apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: portainer-transport
+  namespace: external-routes
+spec:
+  insecureSkipVerify: true
+---
+apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: external-portainer-http
@@ -14,7 +22,5 @@ spec:
           port: 443
           scheme: https
           serversTransport: portainer-transport
-      middlewares:
-        - name: external-portainer-https-headers
   tls:
     secretName: "letsencrypt-wildcard-cert-prod"
