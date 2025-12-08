@@ -1,19 +1,19 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: external-glance-http
+  name: external-portainer-http
   namespace: external-routes
 spec:
   entryPoints:
     - web
     - websecure
   routes:
-    - match: Host(`start.steppler.cloud`)
+    - match: Host(`manage.steppler.cloud`)
       kind: Rule
       services:
-        - name: external-glance-http-svc
+        - name: external-portainer-http-svc
           port: 80
       middlewares:
-        - name: external-glance-http-headers
+        - name: external-portainer-http-headers
   tls:
     secretName: "letsencrypt-wildcard-cert-prod"
