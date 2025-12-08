@@ -5,15 +5,14 @@ metadata:
   namespace: external-routes
 spec:
   entryPoints:
-    - web
     - websecure
   routes:
     - match: Host(`manage.steppler.cloud`)
       kind: Rule
       services:
-        - name: external-portainer-http-svc
-          port: 80
+        - name: external-portainer-https-svc
+          port: 443
       middlewares:
-        - name: external-portainer-http-headers
+        - name: external-portainer-https-headers
   tls:
     secretName: "letsencrypt-wildcard-cert-prod"
