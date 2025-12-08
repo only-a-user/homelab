@@ -13,16 +13,8 @@ metadata:
   namespace: external-routes
 spec:
   entryPoints:
-    web:
-      address: ":80"
-      http:
-        redirections:
-          entryPoint:
-            to: websecure
-            scheme: https
-            serversTransport: external-portainer-transport
-    websecure:
-      address: ":443"
+    - web
+    - websecure
   routes:
     - match: Host(`manage.steppler.cloud`)
       kind: Rule
