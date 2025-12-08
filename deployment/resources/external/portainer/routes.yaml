@@ -12,6 +12,7 @@ spec:
       services:
         - name: external-portainer-https-svc
           port: 443
+          scheme: https
       middlewares:
         - name: external-portainer-https-headers
   tls:

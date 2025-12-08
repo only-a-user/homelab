@@ -7,3 +7,11 @@ spec:
   headers:
     customRequestHeaders:
       X-Forwarded-Proto: "https"
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: ServersTransport
+metadata:
+  name: external-portainer-transport
+  namespace: external-routes
+spec:
+  insecureSkipVerify: true

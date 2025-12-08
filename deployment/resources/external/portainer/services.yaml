@@ -5,7 +5,7 @@ metadata:
   namespace: external-routes
 spec:
   ports:
-    - name: http
+    - name: https
       port: 443
       targetPort: 9443
       protocol: TCP
@@ -19,6 +19,6 @@ subsets:
   - addresses:
       - ip: 10.10.198.114
     ports:
-      - name: http
+      - name: https
         port: 9443
         protocol: TCP
