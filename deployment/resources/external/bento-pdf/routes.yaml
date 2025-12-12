@@ -1,0 +1,19 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: external-bento-http
+  namespace: external-routes
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`bento.steppler.cloud`)
+      kind: Rule
+      services:
+        - name: external-bento-http-svc
+          port: 80
+      middlewares:
+        - name: external-bento-http-headers
+  tls:
+    secretName: "letsencrypt-wildcard-cert-prod"
