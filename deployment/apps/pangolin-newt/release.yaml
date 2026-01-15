@@ -255,7 +255,6 @@ spec:
       - name: "main" # @schema pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$ ; minLength: 1 ; maxLength: 63
         # -- Allow this instance to override global settings (image, logLevel, etc)
         allowGlobalOverride: false
-        enabled: true
         # Preferred: use an existing Secret to source all credentials
         auth:
           # -- Name of the existing Secret with endpoint/id/secret keys
