@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: newt
-      version: 1.0.0
+      version: 1.1.0
       sourceRef:
         kind: HelmRepository
         name: pangolin-newt
@@ -254,6 +254,7 @@ spec:
     newtInstances:
       - name: "main" # @schema pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$ ; minLength: 1 ; maxLength: 63
         # -- Allow this instance to override global settings (image, logLevel, etc)
+        enabled: true
         allowGlobalOverride: false
         # Preferred: use an existing Secret to source all credentials
         auth:
