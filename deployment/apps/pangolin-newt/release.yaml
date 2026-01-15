@@ -253,7 +253,7 @@ spec:
 
     # @section Newt instances
     newtInstances:
-      - name: "main-tunnel" # @schema pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$ ; minLength: 1 ; maxLength: 63
+      - name: "main" # @schema pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$ ; minLength: 1 ; maxLength: 63
         # -- Allow this instance to override global settings (image, logLevel, etc)
         allowGlobalOverride: false
         # Preferred: use an existing Secret to source all credentials
@@ -270,7 +270,7 @@ spec:
             secretKey: NEWT_SECRET
         # Alternative (inline): provide credentials directly (schema enforces non-empty when used)
         # -- Pangolin control-plane endpoint URL (e.g., <https://pangolin.example.com>)
-        pangolinEndpoint: "https://pangolin.example.com" # @schema pattern: ^https?://[a-zA-Z0-9.-]+(/.*)?$
+        pangolinEndpoint: "" # @schema pattern: ^https?://[a-zA-Z0-9.-]+(/.*)?$
         # -- Instance ID issued by Pangolin
         id: ""
         # -- Instance secret issued by Pangolin
