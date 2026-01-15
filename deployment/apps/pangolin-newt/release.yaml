@@ -259,7 +259,7 @@ spec:
         # Preferred: use an existing Secret to source all credentials
         auth:
           # -- Name of the existing Secret with endpoint/id/secret keys
-          existingSecretName: ""
+          existingSecretName: "newt-pangolin-secret"
           # -- Key mappings used inside the existing Secret
           keys:
             # -- Key name for the Pangolin endpoint (default: PANGOLIN_ENDPOINT)
