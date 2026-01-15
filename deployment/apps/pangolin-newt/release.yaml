@@ -14,6 +14,10 @@ spec:
         kind: HelmRepository
         name: pangolin-newt
         namespace: flux-system
+  install:
+    disableSchemaValidation: true
+  upgrade:
+    disableSchemaValidation: true
   values:
     # Default values for Newt.
     # This is a YAML-formatted file.
