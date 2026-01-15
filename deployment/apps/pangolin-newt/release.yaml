@@ -21,7 +21,7 @@ spec:
     #
     # NOTE: The comments in this file are consumed by helm-docs to generate the README.md
     # See https://github.com/norwoodj/helm-docs
-
+    enabled: true
     ## @section Global parameters
     global:
       # -- Global Docker image settings for all components in the Helm chart
