@@ -1,0 +1,21 @@
+cluster:
+  allowSchedulingOnControlPlanes: false
+  apiServer:
+    admissionControl:
+      - name: PodSecurity
+        configuration:
+          apiVersion: pod-security.admission.config.k8s.io/v1beta1
+          kind: PodSecurityConfiguration
+          exemptions:
+            namespaces:
+              - openebs
+  network:
+    cni:
+      name: none
+    dnsDomain: cluster.local
+    podSubnets:
+      - ${pod_network}
+    serviceSubnets:
+      - ${svc_network}
+    proxy:
+      disabled: true
