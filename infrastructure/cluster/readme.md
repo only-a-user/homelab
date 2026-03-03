@@ -2,7 +2,7 @@
 
 ## Image
 
-I used the [Talos Image Factory](https://factory.talos.dev) to generate a nocloud image. It uses the following extensions:
+I used the [Talos Image Factory][talos-image-factory] to generate a nocloud image. It uses the following extensions:
 
 ```yaml
 customization:
@@ -19,3 +19,5 @@ For that I had to take the following steps:
 - Decompress it with `unxz`
 - Upload it to Proxmox under `local/import`
 - Reference it directly in my Terraform configuration
+
+[talos-image-factory]: https://factory.talos.dev
