@@ -43,7 +43,7 @@ talosctl -n "<node-ip>" ls -l /dev/disk/by-id
 
 If we have this, we can create disk pools like this:
 
-```yaml
+```yml
 apiVersion: "openebs.io/v1beta3"
 kind: DiskPool
 metadata:
@@ -65,7 +65,7 @@ kubectl patch storageclass <storage-class-name> -p '{"metadata": {"annotations":
 
 After this, you are good to go.
 
-# Metrics Server
+## Metrics Server
 
 Just run these two commands and the Metrics Server is up and running:
 
@@ -77,6 +77,18 @@ kubectl apply -f https://raw.githubusercontent.com/alex1989hu/kubelet-serving-ce
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
 
+## Flux Operator
+
+I installed FluxCD using the Flux Operator. You can follow [this installation guide][flux-operator]. I am using the Helm Chart to install the operator and then kustomize it using a `FluxInstance`:
+
+```sh
+helm install flux-operator oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator \
+  --namespace flux-system \
+  --create-namespace \
+  --values values.yml
+```
+
 [cilium-helm-docs]: https://docs.cilium.io/en/latest/installation/k8s-install-helm/
 [mayastor-talos-install-doc]: https://openebs.io/docs/Solutioning/openebs-on-kubernetes-platforms/talos
 [openebs-install]: https://openebs.io/docs/quickstart-guide/installation#installation-via-helm
+[flux-operator]: https://fluxoperator.dev/get-started/
