@@ -27,6 +27,56 @@ helm install openebs openebs/openebs \
 > **Important**
 > If you have less than three worker nodes (or nodes which allow for scheduling) you will need to scale down the different replicas of your OpenEBS deployment, lest you want your deployment to fail.
 
+**TODO** add instructions on how to create disk pools.
+### Creating Disk Pools
+
+In order to actually create `PVCs` we need to create disk pools utilizing the additional disks that we deployed on our worker nodes. For that we need the following information:
+
+- The node names
+- The unqiue identifiers of the disks
+
+The latter we can get using this talosctl command:
+
+```sh
+talosctl -n "<node-ip>" ls -l /dev/disk/by-id
+```
+
+If we have this, we can create disk pools like this:
+
+```yaml
+apiVersion: "openebs.io/v1beta3"
+kind: DiskPool
+metadata:
+  name: <pool-name>
+  namespace: openebs
+spec:
+  node: <node-name>
+  disks: ["aio:///dev/disk/by-id/<id>"]
+  topology:
+    labelled:
+      topology-key: topology-value # you might want to adjust this as well
+```
+
+You can then add more customized storage classes or use the default one. You also can set one of these storage classes to be your default:
+
+```sh
+kubectl patch storageclass <storage-class-name> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+```
+
+After this, you are good to go.
+
+# Metrics Server
+
+Just run these two commands and the Metrics Server is up and running:
+
+```sh
+kubectl apply -f https://raw.githubusercontent.com/alex1989hu/kubelet-serving-cert-approver/main/deploy/standalone-install.yaml
+```
+
+```sh
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+```
+
 [cilium-helm-docs]: https://docs.cilium.io/en/latest/installation/k8s-install-helm/
 [mayastor-talos-install-doc]: https://openebs.io/docs/Solutioning/openebs-on-kubernetes-platforms/talos
 [openebs-install]: https://openebs.io/docs/quickstart-guide/installation#installation-via-helm

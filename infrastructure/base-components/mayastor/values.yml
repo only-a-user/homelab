@@ -44,7 +44,7 @@ mayastor:
   etcd:
     # -- Kubernetes Cluster Domain
     clusterDomain: cluster.local
-    replicaCount: 2
+    replicaCount: 3
   localpv-provisioner:
     enabled: false
   crds:
@@ -56,7 +56,7 @@ mayastor:
   nats:
     cluster:
       enabled: true
-      replicas: 2
+      replicas: 3
 
 # This runs only for upgrades from openebs v3 to v4. Uses the localpv-provisioner deployment to decide if it's v3 or v4.
 preUpgradeHook:
@@ -144,7 +144,7 @@ loki:
             prefix: loki_index_
             period: 24h
     commonConfig:
-      replication_factor: 2
+      replication_factor: 3
 
     ingester:
       chunk_encoding: snappy
@@ -162,7 +162,7 @@ loki:
       max_label_names_per_series: 20
 
   singleBinary:
-    replicas: 2
+    replicas: 3
     drivesPerNode: 1
     persistence:
       # -- Enabled persistence for loki
@@ -176,7 +176,7 @@ loki:
 
   minio:
     # -- Specify the number of Minio Replicas.
-    replicas: 2
+    replicas: 3
     drivesPerNode: 1
     mode: distributed
     # -- Disable this if you want to enable external s3 bucket, and uncomment the storage section above.

@@ -2,12 +2,13 @@
 
 variable "nodes" {
   type = map(object({
-    id     = string
-    node   = string
-    ip     = string
-    mac    = string
-    memory = string
-    disk   = string
+    id              = string
+    node            = string
+    ip              = string
+    mac             = string
+    memory          = string
+    disk            = string
+    additional_disk = string
   }))
 }
 
