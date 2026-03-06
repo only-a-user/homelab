@@ -11,9 +11,9 @@ helm install cilium oci://quay.io/cilium/charts/cilium \
   --values values.yml
 ```
 
-## Mayastor
+## OpenEBS
 
-For the installation of Mayastor I followed [this documentation][mayastor-talos-install-doc]. While this details how to configure Talos, it then references [this installation guide][openebs-install] on how to install Mayastor through OpenEBS.
+For the installation of OpenEBD I followed [this documentation][openebs-install].
 
 The command to install OpenEBS is the following:
 
@@ -26,44 +26,6 @@ helm install openebs openebs/openebs \
 
 > **Important**
 > If you have less than three worker nodes (or nodes which allow for scheduling) you will need to scale down the different replicas of your OpenEBS deployment, lest you want your deployment to fail.
-
-**TODO** add instructions on how to create disk pools.
-### Creating Disk Pools
-
-In order to actually create `PVCs` we need to create disk pools utilizing the additional disks that we deployed on our worker nodes. For that we need the following information:
-
-- The node names
-- The unqiue identifiers of the disks
-
-The latter we can get using this talosctl command:
-
-```sh
-talosctl -n "<node-ip>" ls -l /dev/disk/by-id
-```
-
-If we have this, we can create disk pools like this:
-
-```yml
-apiVersion: "openebs.io/v1beta3"
-kind: DiskPool
-metadata:
-  name: <pool-name>
-  namespace: openebs
-spec:
-  node: <node-name>
-  disks: ["aio:///dev/disk/by-id/<id>"]
-  topology:
-    labelled:
-      topology-key: topology-value # you might want to adjust this as well
-```
-
-You can then add more customized storage classes or use the default one. You also can set one of these storage classes to be your default:
-
-```sh
-kubectl patch storageclass <storage-class-name> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
-```
-
-After this, you are good to go.
 
 ## Metrics Server
 
@@ -88,7 +50,12 @@ helm install flux-operator oci://ghcr.io/controlplaneio-fluxcd/charts/flux-opera
   --values values.yml
 ```
 
+After this, just apply the instance:
+
+```sh
+kubectl apply -f instance.yml
+```
+
 [cilium-helm-docs]: https://docs.cilium.io/en/latest/installation/k8s-install-helm/
-[mayastor-talos-install-doc]: https://openebs.io/docs/Solutioning/openebs-on-kubernetes-platforms/talos
 [openebs-install]: https://openebs.io/docs/quickstart-guide/installation#installation-via-helm
 [flux-operator]: https://fluxoperator.dev/get-started/
