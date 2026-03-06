@@ -10,9 +10,5 @@ image/
 outputs/
 
 # fluxcd
-secrets/
-.token.env
-pub-sealed-secrets.pem
-
-# temporary
-deployment/resources/unsealed-secrets
+pub-cert.pem
+**/sealed-secrets/*-unsealed.yml
