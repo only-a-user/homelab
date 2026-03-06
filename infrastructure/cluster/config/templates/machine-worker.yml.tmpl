@@ -1,17 +1,24 @@
 machine:
   install:
     disk: ${install_disk}
+  disks:
+      - device: /dev/sdb
+        partitions:
+          - mountpoint: /var/mnt/openebs-local
   # network:
   #   hostname: ${hostname}
-  sysctls:
-    vm.nr_hugepages: "1024"
-  nodeLabels:
-    openebs.io/engine: "mayastor"
   kubelet:
     extraMounts:
       - destination: /var/local
         type: bind
         source: /var/local
+        options:
+          - bind
+          - rshared
+          - rw
+      - destination: /var/mnt/openebs-local
+        type: bind
+        source: /var/mnt/openebs-local
         options:
           - bind
           - rshared

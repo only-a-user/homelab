@@ -14,7 +14,7 @@ localpv-provisioner:
 zfs-localpv:
   crds:
     zfsLocalPv:
-      enabled: true
+      enabled: false
     csi:
       volumeSnapshots:
         enabled: false
@@ -23,7 +23,7 @@ zfs-localpv:
 lvm-localpv:
   crds:
     lvmLocalPv:
-      enabled: true
+      enabled: false
     csi:
       volumeSnapshots:
         enabled: false
@@ -101,11 +101,11 @@ engines:
   replicated:
     mayastor:
       # -- Enable/Disable Replicated PV Mayastor Storage Engine
-      enabled: true
+      enabled: false
 
 loki:
   # -- Enable/Disable loki.
-  enabled: true
+  enabled: false
   # NOTE: For all possible storage options for loki, check https://github.com/openebs/openebs/blob/HEAD/charts/loki-storage.md
   # Configuration for loki's localpv hostpath storage class.
   localpvScConfig:
@@ -237,7 +237,7 @@ loki:
 
 alloy:
   # -- Enable/Disable Alloy.
-  enabled: true
+  enabled: false
 
   logging_config:
     # Enable debugging on alloy components.
