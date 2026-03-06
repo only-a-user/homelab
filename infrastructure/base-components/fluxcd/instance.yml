@@ -22,7 +22,6 @@ spec:
     domain: "cluster.local"
   sync:
     kind: GitRepository
-    provider: github
     url: "https://github.com/only-a-user/homelab.git"
     ref: "refs/heads/main"
     path: "deployment/init"
