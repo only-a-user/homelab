@@ -9,7 +9,7 @@ spec:
   path: deployment/apps/cnpg
   prune: true
   timeout: 2m
-  targetNamespace: data-system
+  targetNamespace: cnpg-system
   sourceRef:
     kind: GitRepository
     name: flux-system
