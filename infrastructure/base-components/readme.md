@@ -27,6 +27,12 @@ helm install openebs openebs/openebs \
 > **Important**
 > If you have less than three worker nodes (or nodes which allow for scheduling) you will need to scale down the different replicas of your OpenEBS deployment, lest you want your deployment to fail.
 
+After this apply the storage class specific to this setup:
+
+```sh
+kubectl apply -f storageclass.yml
+```
+
 ## Metrics Server
 
 Just run these two commands and the Metrics Server is up and running:

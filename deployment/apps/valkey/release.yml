@@ -144,7 +144,7 @@ spec:
       requestedSize: "16Gi"
 
       # Name of the storage class to use
-      className: "openebs-hostpath"
+      className: "openebs-hostpath-talos"
 
       # Access modes for the PVC (e.g., ReadWriteOnce, ReadWriteMany)
       accessModes:
@@ -318,7 +318,7 @@ spec:
 
     metrics:
       # Enable Prometheus exporter sidecar
-      enabled: true
+      enabled: false
       # Exporter configuration
       exporter:
         # Command to run in the metrics exporter container (overrides args)
