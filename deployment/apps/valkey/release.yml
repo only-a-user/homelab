@@ -383,7 +383,7 @@ spec:
         appProtocol: ""
       serviceMonitor:
         # Enable ServiceMonitor resource for scraping service metrics
-        enabled: true
+        enabled: false
         # Port name or number to scrape metrics from
         port: metrics
         # Extra labels for the ServiceMonitor resource
