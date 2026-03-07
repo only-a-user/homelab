@@ -187,7 +187,8 @@ spec:
       #   memory: 100Mi
 
     # -- Nodeselector for the operator to be installed.
-    nodeSelector: {}
+    nodeSelector:
+      kubernetes.io/hostname: worker-3
 
     # -- Topology Spread Constraints for the operator to be installed.
     topologySpreadConstraints: []
